@@ -6,6 +6,7 @@ use std::vec::Vec;
 use tokio::sync::Semaphore;
 use tokio::task::JoinHandle;
 use tokio::time::{timeout, Duration};
+use tokio_postgres::GenericClient;
 
 #[tokio::main]
 async fn main() {
@@ -135,11 +136,26 @@ mod tests {
     use crate::Pool;
 
     #[tokio::test]
-    async fn test_lol() {
+    async fn get_client_from_empty_pool() {
         let pool = Pool::new(1);
         {
             pool.acquire().await.unwrap();
         }
         assert_eq!(pool.metrics(), 0);
+    }
+    #[tokio::test]
+    async fn get_client_with_timeout_from_empty_pool() {
+    }
+    #[tokio::test]
+    async fn get_client_and_open_with_timeout() {
+    }
+    #[tokio::test]
+    async fn client_returned_to_the_pool_is_reset() {
+    }
+    #[tokio::test]
+    async fn check_clients_pruning() {
+    }
+    #[tokio::test]
+    async fn old_client_gets_pruned() { 
     }
 }
